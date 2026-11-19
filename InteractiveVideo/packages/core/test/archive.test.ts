@@ -14,7 +14,7 @@ interface TestFile {
 
 const encoder = new TextEncoder();
 const fixture = (name: string): Uint8Array =>
-  new Uint8Array(readFileSync(new URL(`../fixtures/ivf/${name}`, import.meta.url)));
+  new Uint8Array(readFileSync(new URL(`../fixtures/ivxpkg/${name}`, import.meta.url)));
 const manifest = {
   format: "IVF",
   format_version: "0.1",
@@ -115,7 +115,7 @@ const validFiles = (media = encoder.encode("video bytes")) => [
 ];
 
 describe("inspectIvfPackage", () => {
-  it.each(["valid/minimal.ivf", "valid/branching.ivf"])("opens the real fixture package %s", async (name) => {
+  it.each(["valid/minimal.ivxpkg", "valid/branching.ivxpkg"])("opens the real fixture package %s", async (name) => {
     const result = await inspectIvfPackage(fixture(name));
     expect(result.ok).toBe(true);
     if (result.ok) {
@@ -130,15 +130,15 @@ describe("inspectIvfPackage", () => {
   });
 
   it.each([
-    ["invalid/missing-manifest.ivf", "IVF_MANIFEST_MISSING"],
-    ["invalid/missing-asset.ivf", "IVF_ASSET_MISSING"],
-    ["invalid/invalid-manifest.ivf", "IVF_MANIFEST_INVALID"],
-    ["invalid/bad-checksum.ivf", "IVF_INVALID_ARCHIVE"],
-    ["invalid/truncated.ivf", "IVF_INVALID_ARCHIVE"],
-    ["malicious/path-traversal.ivf", "IVF_UNSAFE_PATH"],
-    ["malicious/high-ratio.ivf", "IVF_LIMIT_EXCEEDED"],
-    ["malicious/symlink.ivf", "IVF_INVALID_ARCHIVE"],
-    ["malicious/unsupported-compression.ivf", "IVF_UNSUPPORTED_FEATURE"],
+    ["invalid/missing-manifest.ivxpkg", "IVF_MANIFEST_MISSING"],
+    ["invalid/missing-asset.ivxpkg", "IVF_ASSET_MISSING"],
+    ["invalid/invalid-manifest.ivxpkg", "IVF_MANIFEST_INVALID"],
+    ["invalid/bad-checksum.ivxpkg", "IVF_INVALID_ARCHIVE"],
+    ["invalid/truncated.ivxpkg", "IVF_INVALID_ARCHIVE"],
+    ["malicious/path-traversal.ivxpkg", "IVF_UNSAFE_PATH"],
+    ["malicious/high-ratio.ivxpkg", "IVF_LIMIT_EXCEEDED"],
+    ["malicious/symlink.ivxpkg", "IVF_INVALID_ARCHIVE"],
+    ["malicious/unsupported-compression.ivxpkg", "IVF_UNSUPPORTED_FEATURE"],
   ] as const)("rejects fixture package %s with %s", async (name, code) => {
     const result = await inspectIvfPackage(fixture(name));
     expect(result.ok).toBe(false);

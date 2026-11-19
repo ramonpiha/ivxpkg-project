@@ -6,7 +6,7 @@
 **Version:** 0.1\
 **Date:** 2026-11-17\
 **Project name:** IVF (provisional)\
-**File extension:** `.ivf` (provisional)
+**File extension:** `.ivxpkg`
 
 > This document defines an initial prototype direction. It is not a
 > finalized industry standard, security certification, patent opinion,
@@ -72,7 +72,7 @@ The first prototype will not:
   -----------------------------------------------------------------------
   Term                                Meaning
   ----------------------------------- -----------------------------------
-  Package                             The complete `.ivf` file.
+  Package                             The complete `.ivxpkg` file.
 
   Manifest                            The structured document describing
                                       the package.
@@ -228,13 +228,13 @@ media packages.
 
 ## 5.1 Version 0.1 container
 
-An `.ivf` file is, provisionally, a ZIP archive with a required
+An `.ivxpkg` file is a ZIP archive with a required
 `manifest.json` at its root.
 
 Example:
 
 ``` text
-example.ivf
+example.ivxpkg
 ├── manifest.json
 ├── media/
 │   ├── introduction.mp4
@@ -268,8 +268,9 @@ The archive must not contain executable application code.
     multi-disk and encrypted archives. Deflate support requires the
     player's runtime to provide streaming raw-deflate decompression.
 
-The `.ivf` extension is provisional and must not be assumed to be
-globally unique or officially registered.
+The `.ivxpkg` suffix identifies an IVF experience package rather than
+an existing `.ivf` raw-video container. The MIME type is provisionally
+`application/vnd.ivxpkg` and is not yet IANA-registered.
 
 ------------------------------------------------------------------------
 
@@ -407,7 +408,7 @@ types, ranges, string lengths, array limits and unknown-field policy.
 
 ## 7.1 Basic playback sequence
 
-1.  The user selects an `.ivf` file.
+1.  The user selects an `.ivxpkg` file.
 2.  The player inspects the archive.
 3.  The player checks package limits and archive entry types.
 4.  The player reads and parses `manifest.json`.
@@ -839,7 +840,7 @@ packages reliably.
 
 Deliverables:
 
--   A minimal valid `.ivf` package.
+-   A minimal valid `.ivxpkg` package.
 -   Included sample video assets.
 -   A branching example.
 -   Invalid and malicious test fixtures.
@@ -881,7 +882,7 @@ Deliverables:
 -   Branching graph.
 -   Package validation.
 -   Preview using the same player engine.
--   Export to `.ivf`.
+-   Export to `.ivxpkg`.
 
 ## Phase 7 --- Version 1.0 preparation
 
@@ -942,8 +943,8 @@ accidentally during implementation.
 
   Encryption / DRM?       Out of scope for 0.1    Open
 
-  Official file extension Investigate before      Open
-  and media type?         public release          
+  Official file extension `.ivxpkg`; provisional    Decided for 0.1
+                          MIME `application/vnd.ivxpkg`
   -----------------------------------------------------------------------
 
 ------------------------------------------------------------------------
@@ -952,7 +953,7 @@ accidentally during implementation.
 
 The first prototype is complete when all of the following are true:
 
--   A valid `.ivf` archive can be opened by the reader.
+-   A valid `.ivxpkg` archive can be opened by the reader.
 -   The manifest is parsed and validated.
 -   The entry scene plays.
 -   Playback pauses at a defined interaction timestamp.

@@ -96,7 +96,7 @@ async function mediaFile(name) {
 }
 
 async function writeArchive(category, name, files) {
-  const output = join(fixturesDirectory, "ivf", category, name);
+  const output = join(fixturesDirectory, "ivxpkg", category, name);
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, makeZip(files));
 }
@@ -110,7 +110,7 @@ const minimalFiles = [
   { name: "media/video.mp4", data: introduction },
 ];
 
-await writeArchive("valid", "minimal.ivf", minimalFiles);
+await writeArchive("valid", "minimal.ivxpkg", minimalFiles);
 
 const branchingManifest = jsonFile({
   format: "IVF",
@@ -138,51 +138,51 @@ const branchingManifest = jsonFile({
   },
 });
 
-await writeArchive("valid", "branching.ivf", [
+await writeArchive("valid", "branching.ivxpkg", [
   { name: "manifest.json", data: branchingManifest },
   { name: "media/introduction.mp4", data: introduction },
   { name: "media/outcome-a.mp4", data: outcomeA },
   { name: "media/outcome-b.mp4", data: outcomeB },
 ]);
 
-await writeArchive("invalid", "missing-manifest.ivf", [
+await writeArchive("invalid", "missing-manifest.ivxpkg", [
   { name: "media/video.mp4", data: introduction },
 ]);
 
-await writeArchive("invalid", "missing-asset.ivf", [
+await writeArchive("invalid", "missing-asset.ivxpkg", [
   { name: "manifest.json", data: minimalManifest },
 ]);
 
-await writeArchive("invalid", "invalid-manifest.ivf", [
+await writeArchive("invalid", "invalid-manifest.ivxpkg", [
   { name: "manifest.json", data: encoder.encode("{ invalid JSON") },
 ]);
 
-await writeArchive("invalid", "bad-checksum.ivf", [
+await writeArchive("invalid", "bad-checksum.ivxpkg", [
   { name: "manifest.json", data: minimalManifest },
   { name: "media/video.mp4", data: introduction, crcOverride: 0 },
 ]);
 
-await writeArchive("malicious", "path-traversal.ivf", [
+await writeArchive("malicious", "path-traversal.ivxpkg", [
   ...minimalFiles,
   { name: "../outside.txt", data: encoder.encode("outside package") },
 ]);
 
-await writeArchive("malicious", "high-ratio.ivf", [
+await writeArchive("malicious", "high-ratio.ivxpkg", [
   { name: "manifest.json", data: minimalManifest },
   { name: "media/video.mp4", data: encoder.encode("x".repeat(16_384)) },
 ]);
 
-await writeArchive("malicious", "symlink.ivf", [
+await writeArchive("malicious", "symlink.ivxpkg", [
   ...minimalFiles,
   { name: "media/link", data: encoder.encode("video.mp4"), externalAttributes: (0xa000 | 0o777) << 16 },
 ]);
 
-await writeArchive("malicious", "unsupported-compression.ivf", [
+await writeArchive("malicious", "unsupported-compression.ivxpkg", [
   { name: "manifest.json", data: minimalManifest },
   { name: "media/video.mp4", data: introduction, method: 99 },
 ]);
 
 const truncated = makeZip(minimalFiles).slice(0, -5);
-const truncatedPath = join(fixturesDirectory, "ivf", "invalid", "truncated.ivf");
+const truncatedPath = join(fixturesDirectory, "ivxpkg", "invalid", "truncated.ivxpkg");
 await mkdir(dirname(truncatedPath), { recursive: true });
 await writeFile(truncatedPath, truncated);

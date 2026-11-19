@@ -66,6 +66,13 @@ Use pnpm only; do not create `package-lock.json` or `yarn.lock`.
 
 - TypeScript, `strict` plus `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`. No `any` in `src/`
   (tests may use it for building malformed input).
+- Keep methods focused on one responsibility. Apply SOLID principles across the project where they
+  improve cohesion, testability and maintainability; avoid abstractions that add complexity without
+  a clear benefit.
+- Use dependency inversion and dependency injection when they help isolate changeable or external
+  details (for example, I/O or platform services). Prefer simple function parameters or constructors;
+  do not introduce a DI container or extra layers by default, especially in the pure, dependency-light
+  core.
 - ES modules. Imports inside `packages/core/src` are extensionless relative imports.
 - Validators are pure functions: input in, `ValidationResult` out. They must never throw on bad input,
   and must never perform I/O.
@@ -86,8 +93,8 @@ Use pnpm only; do not create `package-lock.json` or `yarn.lock`.
   and the exact error code is asserted.
 - Every security bug found gets a regression test.
 - Test boundaries: exactly at the limit passes, one over fails.
-- Fixtures: valid manifests live in `packages/core/fixtures/valid/`. Real valid and malicious `.ivf`
-  archives live in `packages/core/fixtures/ivf/`; regenerate them with
+- Fixtures: valid manifests live in `packages/core/fixtures/valid/`. Real valid and malicious `.ivxpkg`
+  archives live in `packages/core/fixtures/ivxpkg/`; regenerate them with
   `pnpm --filter @ivf/core fixtures:build`.
 - When changing a safety check, temporarily break it and confirm a test fails (mutation check).
 

@@ -1,6 +1,6 @@
 # IVF (Interactive Video Format)
 
-Reader, player and studio for `.ivf` interactive video packages.
+Reader, player and studio for `.ivxpkg` Interactive Video Format packages.
 The format is defined in [docs/IVF_SPECIFICATION_0_1.md](docs/IVF_SPECIFICATION_0_1.md).
 
 ## Requirements
@@ -51,7 +51,7 @@ Done in `packages/core`:
   CRC verification, and in-memory reads (`src/archive.ts`)
 - Manifest validation: size, UTF-8, nesting depth, duplicate keys, version gate, schema,
   references, uniqueness, assets (`src/manifest.ts`)
-- Real valid and malicious `.ivf` fixtures, including minimal and branching packages with synthetic
+- Real valid and malicious `.ivxpkg` fixtures, including minimal and branching packages with synthetic
   H.264/AAC samples; run `pnpm --filter @ivf/core fixtures:build` to recreate the archives.
 
 Not done yet:
