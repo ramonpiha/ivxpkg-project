@@ -1,0 +1,37 @@
+{
+  "format": "IVF",
+  "format_version": "0.1",
+  "title": "First branching video",
+  "entry_scene": "intro",
+  "scenes": {
+    "intro": {
+      "video": "media/introduction.mp4",
+      "interactions": [
+        {
+          "id": "choose-a-path",
+          "at_seconds": 10,
+          "type": "choice",
+          "prompt": "What should the character do?",
+          "options": [
+            {
+              "label": "Open the door",
+              "next_scene": "door"
+            },
+            {
+              "label": "Walk away",
+              "next_scene": "away"
+            }
+          ]
+        }
+      ]
+    },
+    "door": {
+      "video": "media/outcome-a.mp4",
+      "interactions": []
+    },
+    "away": {
+      "video": "media/outcome-b.mp4",
+      "interactions": []
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "format": "IVF",
+  "format_version": "0.1",
+  "title": "One video, no interactions",
+  "entry_scene": "only",
+  "scenes": {
+    "only": {
+      "video": "media/video.mp4",
+      "interactions": []
+    }
+  }
+}

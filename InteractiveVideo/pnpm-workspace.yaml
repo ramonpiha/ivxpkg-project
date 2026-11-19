@@ -1,0 +1,12 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+
+# Supply-chain hardening (pnpm 11+ setting names).
+# Install/build scripts of dependencies are blocked unless listed here.
+# Add a package only after checking why it needs a build step.
+allowBuilds:
+  esbuild: true
+
+# Do not resolve versions published less than 1 day (1440 min) ago.
+minimumReleaseAge: 1440
