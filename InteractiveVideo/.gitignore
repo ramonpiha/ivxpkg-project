@@ -8,4 +8,4 @@ Thumbs.db
 .env.*
 
 # Generated / local test packages (fixtures that must be committed go in fixtures/)
-*.tmp.ivf
+*.tmp.ivxpkg
