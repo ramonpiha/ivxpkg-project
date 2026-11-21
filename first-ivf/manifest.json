@@ -1,0 +1,31 @@
+{
+  "format": "IVF",
+  "format_version": "0.1",
+  "title": "My interactive video",
+  "entry_scene": "intro",
+  "scenes": {
+    "intro": {
+      "video": "media/video1.mp4",
+      "interactions": [
+        {
+          "id": "choose-path",
+          "at_seconds": 10,
+          "type": "choice",
+          "prompt": "Which video should play next?",
+          "options": [
+            { "label": "video2", "next_scene": "optionA" },
+            { "label": "video3", "next_scene": "optionB" }
+          ]
+        }
+      ]
+    },
+    "optionA": {
+      "video": "media/video2.mp4",
+      "interactions": []
+    },
+    "optionB": {
+      "video": "media/video3.mp4",
+      "interactions": []
+    }
+  }
+}

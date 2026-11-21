@@ -1,0 +1,4 @@
+# Keep generated local IVF packages and source media out of Git.
+/*.zip
+/*.ivxpkg
+/first-ivf/media/

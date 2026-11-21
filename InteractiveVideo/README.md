@@ -35,11 +35,12 @@ pnpm check        # both
 ```
 packages/core     Format core: limits, error codes, JSON Schema, validators.
                   No Node-only, DOM or UI dependencies; uses Web Streams for ZIP reading.
-apps/             (empty) Tauri desktop player and Studio will live here
+apps/player       Tauri desktop player: package selection, validation, playback,
+                  timeline interactions and scene transitions.
 docs/             specification
 ```
 
-## Status: spec roadmap phase 3 (test package), complete
+## Status: spec roadmap phase 4 (basic player), in progress
 
 Done in `packages/core`:
 
